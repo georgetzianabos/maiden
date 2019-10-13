@@ -7,6 +7,7 @@ SOIL_MOISTURE_PIN = mb.pin0
 def loop():
 
     count = 0
+    button_presses = 0
 
     while True:
 
@@ -26,7 +27,13 @@ def loop():
 
         rest_for = 60 if count > 60 else 1
 
-        time.sleep(rest_for)
+        for count in range(rest_for):
+
+            if button_presses is not mb.button_a.get_presses():
+                mb.display.scroll(soil_moisture)
+                button_presses = mb.button_a.get_presses()
+
+            time.sleep(1)
 
 
 loop()
