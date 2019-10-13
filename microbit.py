@@ -14,6 +14,18 @@ class PinClass():
     def read_analog(self):
         return 0
 
+    def write_digital(self, ignore):
+        pass
+
+
+class ButtonClass():
+
+    def is_pressed(self):
+        return False
+
+    def get_presses(self):
+        return 0
+
 
 class DisplayClass():
 
@@ -27,7 +39,21 @@ class DisplayClass():
         pass
 
 
-pin0 = PinClass()
+button_a = ButtonClass()
+button_b = ButtonClass()
+
+
 display = DisplayClass()
+
+pin0 = PinClass()
+pin1 = PinClass()
+pin2 = PinClass()
+pin3 = PinClass()
+pin4 = PinClass()
+pin5 = PinClass()
+pin6 = PinClass()
+pin7 = PinClass()
+pin8 = PinClass()
+pin9 = PinClass()
 
 Image = ImageClass()

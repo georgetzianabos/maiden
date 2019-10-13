@@ -27,7 +27,7 @@ def loop():
 
         rest_for = 60 if count > 60 else 1
 
-        for count in range(rest_for):
+        for pause in range(rest_for):
 
             if button_presses is not mb.button_a.get_presses():
                 mb.display.scroll(soil_moisture)
