@@ -7,6 +7,7 @@ class ImageClass():
 
         self.HAPPY = None
         self.SAD = None
+        self.UMBRELLA = None
 
 
 class PinClass():
