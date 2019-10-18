@@ -5,7 +5,7 @@ SOIL_MOISTURE_PIN = mb.pin0
 PUMP = mb.pin8
 
 
-def run_pump():
+def run_pump(wait_time=0):
 
     mb.display.show(mb.Image.UMBRELLA)
 
@@ -15,14 +15,16 @@ def run_pump():
 
     PUMP.write_digital(0)
 
+    if wait_time:
+        time.sleep(wait_time)
+
     mb.display.clear()
 
 
 def loop():
 
     count = 0
-    button_a_presses = 0
-    button_b_presses = 0
+    PUMP.write_digital(0)
 
     while True:
 
@@ -40,17 +42,18 @@ def loop():
         elif count == 0:
             mb.display.show(mb.Image.SAD)
 
+        if count == 0:
+            run_pump(60)
+
         rest_for = 60 if count > 60 else 1
 
         for _ in range(rest_for):
 
-            if button_a_presses is not mb.button_a.get_presses():
+            if mb.button_a.is_pressed():
                 mb.display.scroll(soil_moisture)
-                button_a_presses = mb.button_a.get_presses()
 
-            if button_b_presses is not mb.button_b.get_presses():
+            if mb.button_b.is_pressed():
                 run_pump()
-                button_b_presses = mb.button_b.get_presses()
 
             time.sleep(1)
 
