@@ -2,6 +2,7 @@ import microbit as mb
 import time
 
 SOIL_MOISTURE_PIN = mb.pin0
+SOIL_MOISTURE_POWER = mb.pin1
 PUMP = mb.pin8
 
 
@@ -21,6 +22,19 @@ def run_pump(wait_time=0):
     mb.display.clear()
 
 
+def soil_moisture_reading():
+
+    SOIL_MOISTURE_POWER.write_digital(1)
+
+    time.sleep(1)
+
+    soil_moisture = SOIL_MOISTURE_PIN.read_analog()
+
+    SOIL_MOISTURE_POWER.write_digital(0)
+
+    return soil_moisture
+
+
 def loop():
 
     count = 0
@@ -28,7 +42,7 @@ def loop():
 
     while True:
 
-        soil_moisture = SOIL_MOISTURE_PIN.read_analog()
+        soil_moisture = soil_moisture_reading()
 
         if soil_moisture > 700:
             count += 1
